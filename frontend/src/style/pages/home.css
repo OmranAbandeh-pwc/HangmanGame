@@ -1,0 +1,59 @@
+
+
+.home-main-container{
+    display: flex;
+    
+    position: relative;
+    top: 40px;
+    height: 450px;
+
+}
+
+.user-progress{
+    position: relative;
+    left: 90px;
+    top: 50px;
+    height: 80%;
+    width: 21%;
+    border: solid;
+}
+.user-progress p{
+    margin-left: 20px;
+}
+.user-progress img{
+    padding-top: 10px;
+    height: 140px;
+    width: 140px;
+}
+.warning{
+    color: rgb(199, 0, 0);
+    font-weight: 800;
+}
+.game-playground-container{
+    width: 70%;
+
+}
+.hangman-word{
+    position: relative;
+    top: 50px;
+}
+
+.words-leter{
+   display: flex;
+   justify-content: center;
+}
+
+.keyboard-container{
+    position: relative;
+    top: 150px;
+    margin: auto;
+    width: 48.5%;
+    
+}
+
+.result-test{
+    position: relative;
+    top: 130px;
+    margin: auto;
+   
+}

@@ -1,0 +1,33 @@
+.game-start-main-container{
+    position: relative;
+    top: 100px;
+    margin: auto;
+    height: 450px;
+    width: 500px;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.game-start-main-container input{
+   margin-bottom: 20px;
+    width: 50%;
+    font-size: 18px;
+    padding: 10px;
+}
+.game-start-main-container button{
+    font-size: 18px;
+    height: 40px;
+    width: 54%;
+}
+
+.game-start-main-container p{
+    font-size: 16px;
+    font-weight: 300;
+    position: relative;
+    bottom: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
