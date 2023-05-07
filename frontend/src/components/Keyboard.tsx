@@ -1,5 +1,4 @@
 
-import { useEffect } from 'react';
 import '../style/components/keyboard.css'
 
 const Keyboard = ({keyclicked, guessedLetter}:{keyclicked:any; guessedLetter:any }) => {

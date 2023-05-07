@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import GameResult from '../components/GameResult';
 import HangmanWord from '../components/HangmanWord';
@@ -7,7 +6,7 @@ import UserProgress from '../components/UserProgress';
 import '../style/pages/home.css'
 import { ResponseObject } from '../types';
 
-const GuessingPage = ({wordLength,wordid}:{wordLength:number,wordid:number}) => {
+const GuessingPage = ({wordLength, wordid, wordScore }:{wordLength:number, wordid:number, wordScore:number}) => {
 
 
   const [guessedLetters, setGuessedLetters] = useState([""])
@@ -86,13 +85,11 @@ useEffect(() => {
   }
 
 
- 
   return (
-    <>
-     
+    <>  
       
       { <div className='home-main-container'>
-        <UserProgress numberOfLoses={result.failsNumber} wordLength={wordToGuess.length}/>
+        <UserProgress wordScore={wordScore} numberOfLoses={result.failsNumber} wordLength={wordToGuess.length}/>
 
         <div className='game-playground-container'>
         <div className='hangman-word'>

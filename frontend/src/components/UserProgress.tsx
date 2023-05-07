@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UserProgress = ({ wordLength, numberOfLoses }: { wordLength:number, numberOfLoses:number}) => {
+const UserProgress = ({ wordLength, numberOfLoses, wordScore }: { wordLength:number, numberOfLoses:number, wordScore:number}) => {
   const hangManImages = [
     'https://www.oligalma.com/downloads/images/hangman/hangman/3.jpg',
     'https://www.oligalma.com/downloads/images/hangman/hangman/4.jpg',
@@ -14,14 +14,15 @@ const UserProgress = ({ wordLength, numberOfLoses }: { wordLength:number, number
   ]
   return (
     <div className='user-progress'>
-      <img src={hangManImages[numberOfLoses]} />
-          <p> user name : <span>omran</span></p>
-          <p> user score : <span>3400</span></p>
-          <p> user loses : <span>{numberOfLoses}</span></p>
-          <p> word length : <span>{wordLength}</span></p>
-          <p className='warning'>warning: you only have 7 attempts</p>
+
+        <img src={hangManImages[numberOfLoses]} />
+        <p> user name : <span>omran</span></p>
+        <p> user score : <span>{wordScore}</span></p>
+        <p> user loses : <span>{numberOfLoses}</span></p>
+        <p> word length : <span>{wordLength}</span></p>
+        <p className='warning'>warning: you only have 7 attempts</p>
           
-        </div>
+    </div>
   )
 }
 

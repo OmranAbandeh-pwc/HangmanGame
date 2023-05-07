@@ -10,7 +10,12 @@
     align-items: center;
     flex-direction: column;
 }
-
+.game-start-main-container h1{
+    position: relative;
+    
+    bottom: 50px;
+    color: rgb(87, 86, 86);
+}
 .game-start-main-container input{
    margin-bottom: 20px;
     width: 50%;
@@ -21,6 +26,8 @@
     font-size: 18px;
     height: 40px;
     width: 54%;
+    margin-bottom: 20px;
+    
 }
 
 .game-start-main-container p{
@@ -30,4 +37,11 @@
     bottom: 50px;
     padding-left: 50px;
     padding-right: 50px;
+}
+
+.loading-start-game{
+    position: relative;
+    top: 20px;
+    font-weight: 300;
+    font-size: 25px;
 }

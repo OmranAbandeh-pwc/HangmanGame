@@ -14,7 +14,7 @@ const getRandomWord = async (req, res) => {
     const data = await response.json()
     let randomIndex = Math.floor(Math.random() * data.length)
     const word = await Word.create({ word:data[randomIndex].word, score:data[randomIndex].score, id: Math.floor(Math.random() * 1000) })
-    res.status(200).json({ id:word.id })
+    res.status(200).json({ id:word.id, score:word.score })
 }
 
 
@@ -29,7 +29,7 @@ const checkAnswer = async (req, res) => {
 
             const answer = check.word.includes(guessedLetter)
             if ( answer ) {
-                // const letterIndex = check.word.indexOf(guessedLetter) 
+                
                 let letterIndex = []
                 for(let i = 0; i < check.word.length; i++){
                     if(guessedLetter === check.word[i]){
@@ -50,18 +50,7 @@ const checkAnswer = async (req, res) => {
 
 }
 
-const update = async (req, res) => {
-    const { id } = req.params
 
-    const score = await Word.findOne({id:id})
 
-    const w = score.score
-    const upd = await Word.findOneAndUpdate( {id:id}, {
-        score : w + 100
-    })
-
-    res.status(200).json({ msg:score.score })
-}
-
-module.exports = { getRandomWord, checkAnswer, update }
+module.exports = { getRandomWord, checkAnswer }
 
