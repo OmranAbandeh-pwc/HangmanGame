@@ -4,24 +4,23 @@ import HangmanWord from '../components/HangmanWord';
 import Keyboard from '../components/Keyboard'
 import UserProgress from '../components/UserProgress';
 import '../style/pages/home.css'
-import { ResponseObject } from '../types';
+import { ResponseObject, ResultObject } from '../types';
 
 const GuessingPage = ({wordLength, wordid, wordScore }:{wordLength:number, wordid:number, wordScore:number}) => {
 
 
   const [guessedLetters, setGuessedLetters] = useState([""])
-  const [result, setResult]:any = useState({
-      
+  const [result, setResult] = useState<ResultObject>({
+
     showResult: false,
-    failsNumber: 0,
+    failsNumber: 7,
     successNumber: 0,
     resultText: ''
-  
+
   })
   const [wordToGuess, setWordToGuess] = useState([''])
 
 
-  
 useEffect(() => {
 
   setWordToGuess(new Array(wordLength).fill('*'))
@@ -38,7 +37,7 @@ useEffect(() => {
         "wordID":wordid
       }
   
-      const response = await fetch("/api/check", {
+      const response = await fetch("/api/checkAnswer", {
         method: "POST",
         headers: {
           "Content-type": "application/json; charest=UTF-8"
@@ -51,10 +50,10 @@ useEffect(() => {
       // If number of fails still less than 6 then I increase one to the fails number
       if(!data.msg){
         
-        if(result.failsNumber > 5){
-          setResult({...result, failsNumber: 7, showResult: true, resultText: "YOU LOSE!! :("})
+        if(result.failsNumber === 1){
+          setResult({...result, failsNumber: 0, showResult: true, resultText: "YOU LOSE!! :("})
         } else {
-          setResult({...result, failsNumber: result.failsNumber + 1})
+          setResult({...result, failsNumber: result.failsNumber - 1})
         }
         // adding the letter to the guessed letters to display the button
         setGuessedLetters([...guessedLetters, key.toLowerCase()])        
@@ -85,10 +84,9 @@ useEffect(() => {
   }
 
 
-  return (
-    <>  
+  return ( 
       
-      { <div className='home-main-container'>
+       <div className='home-main-container'>
         <UserProgress wordScore={wordScore} numberOfLoses={result.failsNumber} wordLength={wordToGuess.length}/>
 
         <div className='game-playground-container'>
@@ -105,10 +103,7 @@ useEffect(() => {
         
         </div>
         
-      </div>      
-      }
-      
-    </>
+      </div>                  
     
   )
 }

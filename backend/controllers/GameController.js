@@ -3,14 +3,12 @@ const Word = require('../models/GameModel')
 
 
 // ----------------API to Get Random Word----------------
-const getRandomWord = async (req, res) => {
+const startGame = async (req, res) => {
     const  {wordLength}  = req.body
-    let sum = ''
-    for(let i = 0; i < wordLength; i++){
-        sum+='?'
-    }
+  
+    const numberOfLetters = new Array(wordLength).fill("?")
     
-    const response = await fetch(`https://api.datamuse.com/words?sp=${sum}&max=1000`)
+    const response = await fetch(`https://api.datamuse.com/words?sp=${numberOfLetters.join("")}&max=1000`)
     const data = await response.json()
     let randomIndex = Math.floor(Math.random() * data.length)
     const word = await Word.create({ word:data[randomIndex].word, score:data[randomIndex].score, id: Math.floor(Math.random() * 1000) })
@@ -22,17 +20,17 @@ const getRandomWord = async (req, res) => {
 // ----------------API to Check the Answer----------------
 const checkAnswer = async (req, res) => {
     const { guessedLetter, wordID } = req.body;
-    const check = await Word.findOne({ id:wordID })
+    const checkWord = await Word.findOne({ id:wordID })
 
     try{
-        if(check){
+        if(checkWord){
 
-            const answer = check.word.includes(guessedLetter)
+            const answer = checkWord.word.includes(guessedLetter)
             if ( answer ) {
                 
                 let letterIndex = []
-                for(let i = 0; i < check.word.length; i++){
-                    if(guessedLetter === check.word[i]){
+                for(let i = 0; i < checkWord.word.length; i++){
+                    if(guessedLetter === checkWord.word[i]){
                         letterIndex.push(i)
                     }
                 }
@@ -52,5 +50,5 @@ const checkAnswer = async (req, res) => {
 
 
 
-module.exports = { getRandomWord, checkAnswer }
+module.exports = { startGame, checkAnswer }
 
