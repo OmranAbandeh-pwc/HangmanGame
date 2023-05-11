@@ -1,9 +1,6 @@
 import express, { Request, Response } from "express"
-
 import jwt from "jsonwebtoken"
-
 import User from "../models/UserModel"
-
 
 
 // Login API Controller

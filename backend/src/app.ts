@@ -18,6 +18,6 @@ mongoose.connect("mongodb://localhost:27017/Typesscript").then(() => {
 console.log("data base connected")
 })
 
-app.listen(5000, () => {
+app.listen(4000, () => {
     console.log("listening on port ",4000)
 })
