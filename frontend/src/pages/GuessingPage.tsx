@@ -28,20 +28,39 @@ useEffect(() => {
 },[])
   
 
+// Set Word to Non Active
+const disableWord = () => {
+  const userToken = localStorage.getItem("userToken")
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${userToken}`);
+  
+  
+  fetch("/hangman/disableWordActive", {
+    method: 'PATCH',
+    headers: myHeaders,
+  })
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+  }
+
+
 // Guessing Function 
   const handleGuesses = async (key:string) => {
-  
+    const userToken = localStorage.getItem("userToken")
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${userToken}`);
+    myHeaders.append("Content-Type", "application/json");
+
     // Fetching the check API to get the response if the letter that have been selected is right or wrong 
       const dataSumbit = {
         "guessedLetter": key.toLowerCase(),
-        "wordID":wordid
+        
       }
   
-      const response = await fetch("/api/checkAnswer", {
+      const response = await fetch("/hangman/checkAnswer", {
         method: "POST",
-        headers: {
-          "Content-type": "application/json; charest=UTF-8"
-        },
+        headers: myHeaders,
         body: JSON.stringify(dataSumbit)
       })
       const data:ResponseObject = await response.json()
@@ -52,6 +71,7 @@ useEffect(() => {
         
         if(result.failsNumber === 1){
           setResult({...result, failsNumber: 0, showResult: true, resultText: "YOU LOSE!! :("})
+          disableWord()
         } else {
           setResult({...result, failsNumber: result.failsNumber - 1})
         }
@@ -74,6 +94,7 @@ useEffect(() => {
           
           if(result.successNumber === wordLength - 1){
             setResult({...result, showResult: true, resultText: "YOU WON!! :)"})
+            disableWord()
           } else {
             setResult({...result, successNumber: result.successNumber + data.letterIndex.length})
           }

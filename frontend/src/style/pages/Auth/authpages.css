@@ -1,0 +1,54 @@
+.main-auth-container{
+    position: relative;
+    top: 60px;
+    margin: auto;
+    height: 600px;
+    width: 700px;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input-container{
+    margin: 20px;
+    width: 70%;
+    height: 35px;
+
+}
+.login-info-container{
+    margin: 20px;
+}
+.login-info-container a{
+    text-decoration: none;
+    color: rgb(32, 130, 249);
+    font-weight: 500;
+}
+
+.input-container input{
+    border-radius: 7px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 16px;
+    height: 100%;
+    width: 92%;
+    border: solid rgb(201, 201, 201);
+}
+
+.login-button-container{
+    width: 70%;
+    height: 38px;
+
+    margin: 20px;
+}
+
+.login-button-container button{
+    font-size: 16px;
+    color: rgb(96, 96, 96);
+    border: solid rgb(201, 201, 201);
+    border-radius: 7px;
+    height: 100%;
+    width: 100%;
+
+}

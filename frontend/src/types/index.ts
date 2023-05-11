@@ -21,3 +21,8 @@ export type StartGameData = {
     loading:boolean,
     showGuessingPage:boolean
 }
+
+export type LoginObject = {
+    token:string,
+    msg:string
+}
