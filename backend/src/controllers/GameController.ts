@@ -1,10 +1,11 @@
 import express ,{ Request, Response } from "express"
 import Word from "../models/WordModel"
+import RequestWithUserRole from "../types/index"
 
 
 
 // Start Game Function API Controller
-export const startGame = async (req:any, res:Response) => {
+export const startGame = async (req:RequestWithUserRole, res:Response) => {
     const { wordLength } = req.body
     const userid = req.userid
     
@@ -17,14 +18,14 @@ export const startGame = async (req:any, res:Response) => {
     let randomIndex = Math.floor(Math.random() * data.length)
 
     const word = await Word.create({ word:data[randomIndex].word, score:data[randomIndex].score, active:true, userid: userid })
-
+    
     
     res.status(200).json({ word })
 }
 
 
 // Check Answer API Controller
-export const checkAnswer = async (req:any, res:Response) => {
+export const checkAnswer = async (req:RequestWithUserRole, res:Response) => {
     const { guessedLetter } = req.body;
     const userid = req.userid
     const checkWord = await Word.findOne({ userid: userid, active:true })
@@ -56,7 +57,7 @@ export const checkAnswer = async (req:any, res:Response) => {
 
 
 // disable word to non active API Controller
-export const disableWordActive = async (req:any, res:Response) => {
+export const disableWordActive = async (req:RequestWithUserRole, res:Response) => {
     const userid = req.userid
     
     const activeWord = await Word.findOneAndUpdate({ userid:userid, active:true },{

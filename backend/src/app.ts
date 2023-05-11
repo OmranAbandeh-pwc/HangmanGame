@@ -2,6 +2,7 @@ import express, {Request, Response, NextFunction} from 'express'
 import mongoose from 'mongoose'
 import { router } from "./routers/GameRouter"
 
+
 const app = express()
 
 app.use(express.json())
@@ -17,6 +18,6 @@ mongoose.connect("mongodb://localhost:27017/Typesscript").then(() => {
 console.log("data base connected")
 })
 
-app.listen(4000, () => {
+app.listen(5000, () => {
     console.log("listening on port ",4000)
 })

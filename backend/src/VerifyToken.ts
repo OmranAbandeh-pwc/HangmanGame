@@ -1,11 +1,11 @@
 import jwt from "jsonwebtoken"
 
-import { Request, Response, NextFunction } from "express"
+import {  Response, NextFunction } from "express"
+
+import RequestWithUserRole from "./types/index"
 
 
-
-
-export const verifyToken = async (req:any, res:Response, next:NextFunction) => {
+export const verifyToken = async (req:RequestWithUserRole, res:Response, next:NextFunction) => {
     const bearerHeader = req.headers['authorization']
 
     if(typeof bearerHeader !== 'undefined'){
