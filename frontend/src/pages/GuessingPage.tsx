@@ -5,6 +5,7 @@ import Keyboard from '../components/Keyboard'
 import UserProgress from '../components/UserProgress';
 import '../style/pages/home.css'
 import { ResponseObject, ResultObject } from '../types';
+import { disableWordActive } from "../functions/index"
 
 const GuessingPage = ({wordLength, wordid, wordScore }:{wordLength:number, wordid:number, wordScore:number}) => {
 
@@ -16,10 +17,8 @@ const GuessingPage = ({wordLength, wordid, wordScore }:{wordLength:number, wordi
     failsNumber: 7,
     successNumber: 0,
     resultText: ''
-
   })
   const [wordToGuess, setWordToGuess] = useState([''])
-
 
 useEffect(() => {
 
@@ -27,22 +26,6 @@ useEffect(() => {
   
 },[])
   
-
-// Set Word to Non Active
-const disableWord = () => {
-  const userToken = localStorage.getItem("userToken")
-  var myHeaders = new Headers();
-  myHeaders.append("Authorization", `Bearer ${userToken}`);
-  
-  
-  fetch("/hangman/disableWordActive", {
-    method: 'PATCH',
-    headers: myHeaders,
-  })
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
-  }
 
 
 // Guessing Function 
@@ -71,7 +54,7 @@ const disableWord = () => {
         
         if(result.failsNumber === 1){
           setResult({...result, failsNumber: 0, showResult: true, resultText: "YOU LOSE!! :("})
-          disableWord()
+          disableWordActive()
         } else {
           setResult({...result, failsNumber: result.failsNumber - 1})
         }
@@ -94,7 +77,7 @@ const disableWord = () => {
           
           if(result.successNumber === wordLength - 1){
             setResult({...result, showResult: true, resultText: "YOU WON!! :)"})
-            disableWord()
+            disableWordActive()
           } else {
             setResult({...result, successNumber: result.successNumber + data.letterIndex.length})
           }
@@ -130,3 +113,4 @@ const disableWord = () => {
 }
 
 export default GuessingPage
+

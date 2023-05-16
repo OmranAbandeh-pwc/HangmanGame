@@ -2,6 +2,9 @@ import {  useEffect, useState } from "react"
 import '../style/pages/gamestart.css'
 import GuessingPage from "./GuessingPage"
 import { StartGameData } from "../types"
+import { disableWordActive } from "../functions/index"
+
+import PulseLoader from "react-spinners/PulseLoader"
 
 
 const Home = () => {
@@ -18,25 +21,10 @@ const Home = () => {
 
 
   useEffect(() => {
-    disableWord()
+    disableWordActive()
   }, [])
 
 
-  // Set Word to Non Active
-const disableWord = () => {
-  const userToken = localStorage.getItem("userToken")
-  var myHeaders = new Headers();
-  myHeaders.append("Authorization", `Bearer ${userToken}`);
-  
-  
-  fetch("/hangman/disableWordActive", {
-    method: 'PATCH',
-    headers: myHeaders,
-  })
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
-  }
 
 
   // Start Game Function
@@ -86,7 +74,7 @@ const disableWord = () => {
       <input type="number" min={3} max={7} onChange={(val) => setStartGameData({...startGameData,wordLength: +val.target.value})}/>
       <button onClick={handleStartGame}>Start The Game</button>
       <button onClick={logoutHandle}>logout</button>
-      <div className="loading-start-game">{ startGameData.loading ? 'Loading....' : "Let's go"}</div>
+      <div className="loading-start-game">{ startGameData.loading ? <PulseLoader color="grey"/> : "Let's go"}</div>
     </div> }   
     </>
   )

@@ -11,8 +11,28 @@ export const wordSchema = new Schema ({
         type:Number,
         required: true
     },
-    active: {
-        type:Boolean,
+    wordLength: {
+        type:Number,
+        required:true
+    },
+    guesses: {
+        type: Array,
+        required: true
+    },
+    correctGuesses: {
+        type: Array,
+        required: true
+    },
+    incorrectGuesses: {
+        type: Array,
+        required: true
+    },
+    remainingGuesses: {
+        type: Number,
+        required: true
+    },
+    status: {
+        type: String,
         required: true
     },
     userid: {
